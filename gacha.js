@@ -3,8 +3,11 @@
 
   const resArea = document.getElementById('result');
   const gachaBtn = document.getElementById('gacha');
+  const clearBtn = document.getElementById('clear');
+  const specArea = document.getElementById('speclist');
 
-  let gacha = ["★5キタ━（・∀・）━！！！！", "★4か", "★3(´･ω･`)"];
+  let gacha = ["★5", "★4", "★3"];
+  let comment = ["キタ━（・∀・）━！！！！", "か", "(´･ω･`)"];
   let prob = [5, 20, 75];
   let hitTable = [];
   let total = 0;
@@ -14,8 +17,12 @@
     total += prob[i];
     hitTable.push(total);
 
+    const li = document.createElement("li");
+    li.innerHTML = `${gacha[i]}(${prob[i]}%)`;
+    specArea.appendChild(li);
+
     // debug
-    console.log(`i=${i}, total[${i}]=${total}`);
+    // console.log(`i=${i}, total[${i}]=${total}`);
   }
 
   gachaBtn.onclick = (event) => {
@@ -23,10 +30,19 @@
     pullGacha(11);
   };
 
+  clearBtn.onclick = (event) => {
+    const area = document.getElementsByClassName("res-child");
+    for (let i=area.length-1; i>=0; i--) {
+      area[i].remove();
+    }
+    pullNum = 0;
+  }
+
   function pullGacha(num) {
 
     // 何回目か分かるように
     const area = document.createElement(`div`);
+    area.classList.add("res-child");
     resArea.prepend(area);
     area.appendChild(document.createElement('hr'));
     const header = document.createElement('p');
@@ -35,7 +51,7 @@
 
     for (let i=0; i<num; i++) {
       let res = getResult(Math.random() * 100);
-      console.log(`result=${res}`)
+      // console.log(`result=${res}`)
 
       const p = document.createElement('p');
       p.innerHTML = res;
@@ -44,16 +60,16 @@
   }
 
   function getResult(input) {
-    console.log(`input=${input}`);
+    // console.log(`input=${input}`);
     for (let i=0; i<gacha.length; i++) {
       if (input < parseFloat(hitTable[i])) {
-        return gacha[i];
+        return `${gacha[i]} ${comment[i]}` ;
       }
       else {
-        console.log(`input(${input}) is higher than hitTable[{$i}]=${hitTable[i]}.`);
+        // console.log(`input(${input}) is higher than hitTable[{$i}]=${hitTable[i]}.`);
       }
     }
-    return gacha[gacha.length-1];
+    return `${gacha[gacha.length-1]} ${comment[i]}`;
   }
 
 })();
