@@ -54,7 +54,7 @@
       // console.log(`result=${res}`)
 
       const p = document.createElement('p');
-      p.innerHTML = res;
+      p.innerHTML = `${gacha[res]} ${comment[res]}`;
       area.appendChild(p);
     }
   }
@@ -63,13 +63,10 @@
     // console.log(`input=${input}`);
     for (let i=0; i<gacha.length; i++) {
       if (input < parseFloat(hitTable[i])) {
-        return `${gacha[i]} ${comment[i]}` ;
-      }
-      else {
-        // console.log(`input(${input}) is higher than hitTable[{$i}]=${hitTable[i]}.`);
+        return i;
       }
     }
-    return `${gacha[gacha.length-1]} ${comment[i]}`;
+    return gacha.length - 1;
   }
 
 })();
