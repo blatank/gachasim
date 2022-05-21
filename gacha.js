@@ -6,9 +6,10 @@
   const clearBtn = document.getElementById('clear');
   const specArea = document.getElementById('speclist');
 
-  let gacha = ["★5", "★4", "★3"];
-  let comment = ["キタ━（・∀・）━！！！！", "か", "(´･ω･`)"];
-  let prob = [5, 20, 75];
+  const gacha = ["ピックアップ4周年記念SSR", "4周年記念SSR", "大輪祭限定SSR","常設SSR", "SR", "R"];
+  const comment = ["キタ━（・∀・）━！！！！", "期待してなかった方がキタ━（・∀・）━！！！！", "大輪祭限定か", "常設はいらねえ…", "(たまには使えるもののアビリティLv上がるかもしれない)", "orz"];
+  const prob = [0.8, 0.4, 0.2, 8.6, 50, 40];
+  const pull = 10;
   let hitTable = [];
   let total = 0;
   let pullNum = 0;
@@ -27,7 +28,7 @@
 
   gachaBtn.onclick = (event) => {
     pullNum++;
-    pullGacha(11);
+    pullGacha(pull);
   };
 
   clearBtn.onclick = (event) => {
